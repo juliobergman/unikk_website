@@ -2,7 +2,7 @@
   <v-main>
     <v-img
       height="100vh"
-      src="/src/assets/web/welcome.jpg"
+      :src="mainimage"
       class="black p-0"
       style="background-position: fixed"
     >
@@ -61,20 +61,28 @@
 <script>
 import { bus } from "../../bus";
 import IconLogo from "../ui/icons/logo.vue";
+import welcomejpg from "../../assets/web/welcome.jpg";
 export default {
   components: {
     IconLogo,
   },
   data: () => ({
+    mainimage: "",
     chevronDown: {
       to: "about",
     },
     iconColor: "white",
   }),
   methods: {
+    init() {
+      this.mainimage = welcomejpg;
+    },
     busEmit(name, data = null) {
       bus.$emit(name, data);
     },
+  },
+  created() {
+    this.init();
   },
 };
 </script>
