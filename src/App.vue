@@ -1,53 +1,74 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-main>
+    <app-bar />
+    <drawer />
+    <transition :name="transitionName" mode="out-in">
       <router-view />
-    </v-main>
+    </transition>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import { bus } from "./bus";
+import AppBar from "./components/ui/AppBar.vue";
+import Drawer from "./components/ui/Drawer.vue";
 export default {
   name: "App",
   components: {
-    HelloWorld,
+    AppBar,
+    Drawer,
   },
   data: () => ({
-    //
+    rvid: 0,
+    transitionName: "slide-down",
   }),
+  methods: {
+    onResize() {},
+  },
+  beforeDestroy() {
+    if (typeof window === "undefined") return;
+    window.removeEventListener("resize", this.onResize, { passive: true });
+  },
+  created() {},
+  mounted() {
+    // Router Transitions
+    this.$router.beforeEach((to, from, next) => {
+      let toDepth = to.meta.depth;
+      let fromDepth = from.meta.depth;
+      this.rvid++;
+      bus.$emit("key:update", this.rvid);
+      this.transitionName = toDepth < fromDepth ? "slide-down" : "slide-up";
+      next();
+    });
+    // Resize
+    this.onResize();
+    window.addEventListener("resize", this.onResize, { passive: true });
+  },
 };
 </script>
+<style scoped>
+.slide-enter,
+.slide-leave-to {
+  opacity: 0;
+  transform: translateY(-200vh);
+}
+.slide-up-leave-to,
+.slide-down-enter {
+  opacity: 0;
+  transform: translateY(-100vw);
+}
+.slide-down-leave-to,
+.slide-up-enter {
+  opacity: 0;
+  transform: translateY(100vw);
+}
+
+.slide-enter-active,
+.slide-leave-active,
+.slide-down-enter-active,
+.slide-down-leave-active,
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all 0.5s ease;
+}
+</style>
