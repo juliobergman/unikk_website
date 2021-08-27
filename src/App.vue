@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <app-bar />
-    <drawer />
+    <drawer v-if="false" />
     <transition :name="transitionName" mode="out-in">
       <router-view />
     </transition>

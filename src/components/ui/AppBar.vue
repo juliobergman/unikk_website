@@ -14,6 +14,7 @@
       <v-spacer></v-spacer> -->
 
       <v-btn
+        v-if="false"
         @click="busEmit('drawer:toggle')"
         :dark="darkBtn"
         class="mr-2"

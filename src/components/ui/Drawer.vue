@@ -13,6 +13,33 @@
 
     <v-divider></v-divider>
 
+    <v-list dense nav class="mt-1">
+      <v-menu offset-y>
+        <template v-slot:activator="{ on, attrs }">
+          <v-list-item link v-bind="attrs" v-on="on">
+            <v-list-item-icon>
+              <v-icon>mdi-translate</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>{{ lang }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </template>
+        <v-list>
+          <v-list-item
+            v-for="language in languages"
+            :key="language.name"
+            @click="setLanguage(language)"
+          >
+            <v-list-item-title>{{ language.name }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </v-list>
+
+    <v-divider></v-divider>
+
     <v-list dense nav>
       <v-list-item
         v-for="item in items"
@@ -25,7 +52,7 @@
         </v-list-item-icon>
 
         <v-list-item-content>
-          <v-list-item-title>{{ item.text }}</v-list-item-title>
+          <v-list-item-title>{{ $t(item.to) }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -42,29 +69,31 @@ export default {
   data: () => ({
     drawer: false,
     selected: 0,
+    lang: "",
+    languages: [
+      { name: "English", value: "en" },
+      { name: "Deutsch", value: "de" },
+      { name: "Español", value: "es" },
+      // {name: '', value: ''},
+    ],
     items: [
       {
-        text: "Home",
         icon: "mdi-view-dashboard",
         to: "welcome",
       },
       {
-        text: "About Us",
         icon: "mdi-camera-iris",
         to: "about",
       },
       {
-        text: "Investment Strategy",
         icon: "mdi-laptop",
         to: "investment",
       },
       {
-        text: "Geographical focus",
         icon: "mdi-flask-outline",
         to: "geofocus",
       },
       {
-        text: "Contact",
         icon: "mdi-account",
         to: "contact",
       },
@@ -78,8 +107,15 @@ export default {
       }
       this.$router.push({ name: item.to });
     },
+    setLanguage(language) {
+      localStorage.setItem("lang", language.value);
+      localStorage.setItem("language", language.name);
+      this.lang = language.name;
+      window.location.reload();
+    },
   },
   created() {
+    this.lang = localStorage.getItem("language") || "English";
     this.items.findIndex((element, index) => {
       if (element.to == this.$router.currentRoute.name) {
         this.selected = index;
@@ -93,6 +129,7 @@ export default {
     });
     bus.$on("menu:go", this.goto);
   },
+  watch: {},
 };
 </script>
 

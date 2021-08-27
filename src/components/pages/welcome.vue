@@ -24,10 +24,10 @@
             <icon-logo :fill="iconColor"></icon-logo>
 
             <v-card-text
-              class="welcome-card-text title white--text mt-3 pa-0"
+              class="welcome-card-text title white--text text-center mt-3 pa-0"
               style="opacity: 0.8"
             >
-              Agile, Impactful, Valuable.
+              {{ $t("slogan") }}
             </v-card-text>
           </v-card>
 
@@ -43,6 +43,7 @@
           >
           </v-card>
           <v-btn
+            v-if="false"
             icon
             dark
             class="mx-auto align-self-end mb-5"
