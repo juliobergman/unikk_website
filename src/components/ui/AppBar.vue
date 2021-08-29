@@ -7,14 +7,7 @@
 
       <v-spacer></v-spacer>
 
-      <!-- <v-btn @click="busEmit('drawer:toggle')" :dark="darkBtn" icon small>
-        <v-icon> mdi-chevron-up </v-icon>
-      </v-btn>
-
-      <v-spacer></v-spacer> -->
-
       <v-btn
-        v-if="false"
         @click="busEmit('drawer:toggle')"
         :dark="darkBtn"
         class="mr-2"

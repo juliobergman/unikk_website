@@ -18,6 +18,7 @@ const routes = [
       depth: "0",
       darkLogo: true,
       darkBtn: true,
+      darkNavs: true,
     },
   },
   {
@@ -28,6 +29,7 @@ const routes = [
       depth: "1",
       darkLogo: false,
       darkBtn: true,
+      darkNavs: false,
     },
   },
   {
@@ -36,8 +38,9 @@ const routes = [
     path: "/investment",
     meta: {
       depth: "2",
-      darkLogo: false,
+      darkLogo: true,
       darkBtn: false,
+      darkNavs: false,
     },
   },
   {
@@ -46,8 +49,9 @@ const routes = [
     path: "/geofocus",
     meta: {
       depth: "3",
-      darkLogo: false,
-      darkBtn: false,
+      darkLogo: true,
+      darkBtn: true,
+      darkNavs: true,
     },
   },
   {
@@ -58,6 +62,7 @@ const routes = [
       depth: "4",
       darkLogo: false,
       darkBtn: false,
+      darkNavs: false,
     },
   },
 ];

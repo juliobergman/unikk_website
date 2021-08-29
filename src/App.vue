@@ -1,10 +1,11 @@
 <template>
-  <v-app>
+  <v-app id="app-main">
     <app-bar />
-    <drawer v-if="false" />
+    <drawer />
     <transition :name="transitionName" mode="out-in">
-      <router-view />
+      <router-view id="app-content" />
     </transition>
+    <app-navigator />
   </v-app>
 </template>
 
@@ -12,25 +13,52 @@
 import { bus } from "./bus";
 import AppBar from "./components/ui/AppBar.vue";
 import Drawer from "./components/ui/Drawer.vue";
+import AppNavigator from "./components/ui/AppNavigator.vue";
 export default {
   name: "App",
   components: {
     AppBar,
     Drawer,
+    AppNavigator,
   },
   data: () => ({
     rvid: 0,
     transitionName: "slide-down",
   }),
   methods: {
+    appNavigator(action) {
+      console.log(action);
+    },
     onResize() {},
+    scroll() {
+      window.onscroll = () => {
+        let bottomOfWindow =
+          Math.max(
+            window.pageYOffset,
+            document.documentElement.scrollTop,
+            document.body.scrollTop
+          ) +
+            window.innerHeight ===
+          document.documentElement.offsetHeight;
+
+        if (bottomOfWindow) {
+          console.log("bottom");
+          // this.scrolledToBottom = true; // replace it with your code
+        }
+      };
+    },
   },
   beforeDestroy() {
     if (typeof window === "undefined") return;
     window.removeEventListener("resize", this.onResize, { passive: true });
   },
-  created() {},
+  created() {
+    if (!localStorage.getItem("lang")) {
+      localStorage.setItem("lang", "en");
+    }
+  },
   mounted() {
+    this.scroll();
     // Router Transitions
     this.$router.beforeEach((to, from, next) => {
       let toDepth = to.meta.depth;
@@ -39,6 +67,9 @@ export default {
       bus.$emit("key:update", this.rvid);
       this.transitionName = toDepth < fromDepth ? "slide-down" : "slide-up";
       next();
+    });
+    this.$router.afterEach(function (transition) {
+      document.getElementById("app-content").focus();
     });
     // Resize
     this.onResize();
@@ -55,12 +86,12 @@ export default {
 .slide-up-leave-to,
 .slide-down-enter {
   opacity: 0;
-  transform: translateY(-100vw);
+  transform: translateY(-100vh);
 }
 .slide-down-leave-to,
 .slide-up-enter {
   opacity: 0;
-  transform: translateY(100vw);
+  transform: translateY(100vh);
 }
 
 .slide-enter-active,
@@ -69,6 +100,6 @@ export default {
 .slide-down-leave-active,
 .slide-up-enter-active,
 .slide-up-leave-active {
-  transition: all 0.5s ease;
+  transition: all 0.3s ease;
 }
 </style>

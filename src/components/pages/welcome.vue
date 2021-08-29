@@ -2,7 +2,7 @@
   <v-main>
     <v-img
       height="100vh"
-      :src="mainimage"
+      :src="require('/src/assets/web/welcome.jpg')"
       class="black p-0"
       style="background-position: fixed"
     >
@@ -42,16 +42,6 @@
             elevation="0"
           >
           </v-card>
-          <v-btn
-            v-if="false"
-            icon
-            dark
-            class="mx-auto align-self-end mb-5"
-            absolute
-            @click="busEmit('menu:go', chevronDown)"
-          >
-            <v-icon> mdi-chevron-down </v-icon>
-          </v-btn>
         </v-row>
       </template>
     </v-img>
@@ -61,29 +51,15 @@
 <script>
 import { bus } from "../../bus";
 import IconLogo from "../ui/icons/logo.vue";
-import welcomejpg from "../../assets/web/welcome.jpg";
 export default {
   components: {
     IconLogo,
   },
   data: () => ({
-    mainimage: "",
-    chevronDown: {
-      to: "about",
-    },
     iconColor: "white",
   }),
-  methods: {
-    init() {
-      this.mainimage = welcomejpg;
-    },
-    busEmit(name, data = null) {
-      bus.$emit(name, data);
-    },
-  },
-  created() {
-    this.init();
-  },
+  methods: {},
+  created() {},
 };
 </script>
 

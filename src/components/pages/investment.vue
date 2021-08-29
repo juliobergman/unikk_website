@@ -1,31 +1,44 @@
 <template>
   <v-main>
-    <v-container fluid class="align-start fill-height pa-0 cont">
+    <v-container fluid class="align-stretch fill-height pa-0 cont">
       <v-row no-gutters class="fill-height">
-        <v-col order="1" order-md="0" cols="12" md="4">
-          <v-img height="100%" src="/src/assets/web/about.jpg"></v-img>
-        </v-col>
-        <v-col order="1" order-md="0" cols="12" md="8">
-          <v-container
-            class="fill-height d-flex flex-column align-start px-16 pt-16"
+        <!-- v-if="$isMobile()" -->
+        <v-col
+          order="2"
+          order-md="2"
+          cols="12"
+          md="9"
+          class="px-6 py-12 px-md-16 pt-md-3 mt-md-10"
+        >
+          <!-- <div
+            class="
+              zcontainer
+              d-none d-md-inline
+              text-h4 text-md-h2
+              primary
+              py-16
+              px-16
+              white--text
+            "
           >
-            <div class="text-h3 primary--text my-16">Investment Strategy</div>
-            <div class="text-body-1">
-              <p>
-                Our investment strategy combines top-bottom and bottom-up
-                approaches for the allocation of investment budgets in the
-                different asset classes.
-              </p>
-            </div>
-
-            <v-btn
-              class="mx-auto mt-auto mb-3"
-              icon
-              @click="busEmit('menu:go', chevronDown)"
-            >
-              <v-icon> mdi-chevron-down </v-icon>
-            </v-btn>
-          </v-container>
+            {{ $t("investment") }}
+          </div> -->
+          <div class="text-h4 text-md-h2 primary--text mb-9 mb-md-16">
+            {{ $t("investment") }}
+          </div>
+          <div class="first-text text-body-1 text-md-h5 mb-7 mb-md-14">
+            {{ $t("investment-1") }}
+          </div>
+          <div class="mb-7 mb-md-14">
+            <slide />
+          </div>
+        </v-col>
+        <v-col order="0" order-md="0" cols="12" md="3">
+          <v-img
+            height="100%"
+            max-width="100vw"
+            :src="require('/src/assets/web/about.jpg')"
+          ></v-img>
         </v-col>
       </v-row>
     </v-container>
@@ -33,20 +46,33 @@
 </template>
 
 <script>
-import { bus } from "../../bus";
+import Slide from "./components/investmentSlide.vue";
 export default {
-  data: () => ({
-    chevronDown: {
-      to: "investment",
-    },
-  }),
-  methods: {
-    busEmit(name, data = null) {
-      bus.$emit(name, data);
-    },
-  },
+  components: { Slide },
+  data: () => ({}),
+  methods: {},
+  created() {},
   mounted() {},
 };
 </script>
 
-<style></style>
+<style scoped>
+.zcontainer {
+  z-index: 5;
+  position: absolute;
+  left: 0;
+  width: 100vw;
+}
+.slider {
+  position: absolute;
+  margin: auto;
+  left: 0;
+  z-index: 2;
+  width: 100vw;
+}
+@media (min-width: 960px) {
+  .first-text {
+    margin-top: 0px;
+  }
+}
+</style>

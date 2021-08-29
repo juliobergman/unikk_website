@@ -14,7 +14,7 @@
     <v-divider></v-divider>
 
     <v-list dense nav class="mt-1">
-      <v-menu offset-y>
+      <v-menu offset-y dark>
         <template v-slot:activator="{ on, attrs }">
           <v-list-item link v-bind="attrs" v-on="on">
             <v-list-item-icon>
@@ -74,27 +74,26 @@ export default {
       { name: "English", value: "en" },
       { name: "Deutsch", value: "de" },
       { name: "Español", value: "es" },
-      // {name: '', value: ''},
     ],
     items: [
       {
-        icon: "mdi-view-dashboard",
+        icon: "mdi-home",
         to: "welcome",
       },
       {
-        icon: "mdi-camera-iris",
+        icon: "mdi-domain",
         to: "about",
       },
       {
-        icon: "mdi-laptop",
+        icon: "mdi-finance",
         to: "investment",
       },
       {
-        icon: "mdi-flask-outline",
+        icon: "mdi-earth",
         to: "geofocus",
       },
       {
-        icon: "mdi-account",
+        icon: "mdi-at",
         to: "contact",
       },
     ],
