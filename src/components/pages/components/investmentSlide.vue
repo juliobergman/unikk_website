@@ -2,7 +2,7 @@
   <v-container fluid class="pa-0">
     <v-row>
       <v-col v-for="item in items" :key="item.title" cols="6" :md="item.colmd">
-        <v-card dark>
+        <v-card dark flat tile>
           <v-img :aspect-ratio="10 / 7" :src="img(item.img)">
             <v-container
               fill-height

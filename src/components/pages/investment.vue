@@ -37,7 +37,7 @@
           <v-img
             height="100%"
             max-width="100vw"
-            :src="require('/src/assets/web/about.jpg')"
+            :src="require('/src/assets/web/investment.jpg')"
           ></v-img>
         </v-col>
       </v-row>
