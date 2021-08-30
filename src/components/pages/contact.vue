@@ -3,7 +3,7 @@
     <v-container fluid class="align-content-center pa-0 fill-height">
       <v-row no-gutters>
         <v-col cols="12" class="px-6 px-md-16">
-          <div class="text-h4 text-md-h2 primary--text mt-5 mb-9 my-md-12">
+          <div class="text-h4 text-md-h2 primary--text mt-16 mb-6 my-md-12">
             {{ $t("contact") }}
           </div>
         </v-col>
@@ -22,7 +22,7 @@
                   mt-auto
                   flex-grow-1
                   text-center text-md-right
-                  py-6
+                  py-4
                   pr-md-16
                 "
               >
@@ -31,7 +31,7 @@
             </v-container>
           </v-img>
         </v-col>
-        <v-col cols="12" class="px-6 px-md-16 d-flex py-10">
+        <v-col cols="12" class="px-6 px-md-16 d-flex py-4 pb-md-16 pt-md-10">
           <v-btn
             color="grey darken-3"
             text

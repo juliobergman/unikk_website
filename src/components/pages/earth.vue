@@ -11,8 +11,6 @@ import {
 } from "three/examples/jsm/objects/Lensflare.js";
 
 import earthDayMap from "../../assets/tex/earth_daymap.jpg";
-import earthNightMap from "../../assets/tex/earth_nightmap.jpg";
-import earthNightBlue from "../../assets/tex/earth_nightmap_blue.jpg";
 import earthNormalMap from "../../assets/tex/earth_normal_map.jpg";
 import earthSpecularMap from "../../assets/tex/earth_specular_map.jpg";
 import earthClouds from "../../assets/tex/earth_cloudmap.jpg";
@@ -258,6 +256,9 @@ export default {
     },
     onWindowResize() {
       let container = document.getElementById("container");
+      if (!container || container == null) {
+        return;
+      }
       this.camera.aspect = container.clientWidth / container.clientHeight;
       this.camera.updateProjectionMatrix();
       this.renderer.setSize(container.clientWidth, container.clientHeight);
