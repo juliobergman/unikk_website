@@ -5,6 +5,7 @@ import Welcome from "../components/pages/welcome.vue";
 import About from "../components/pages/about.vue";
 import Investment from "../components/pages/investment.vue";
 import Geofocus from "../components/pages/geofocus.vue";
+import Earth from "../components/pages/geofocus2.vue";
 import Contact from "../components/pages/contact.vue";
 
 Vue.use(VueRouter);
@@ -55,11 +56,22 @@ const routes = [
     },
   },
   {
+    component: Earth,
+    name: "earth",
+    path: "/earth",
+    meta: {
+      depth: "4",
+      darkLogo: true,
+      darkBtn: true,
+      darkNavs: true,
+    },
+  },
+  {
     component: Contact,
     name: "contact",
     path: "/contact",
     meta: {
-      depth: "4",
+      depth: "5",
       darkLogo: false,
       darkBtn: false,
       darkNavs: false,

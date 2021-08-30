@@ -3,7 +3,7 @@
     <app-bar />
     <drawer />
     <transition :name="transitionName" mode="out-in">
-      <router-view id="app-content" />
+      <router-view />
     </transition>
     <app-navigator />
   </v-app>
@@ -69,7 +69,7 @@ export default {
       next();
     });
     this.$router.afterEach(function (transition) {
-      document.getElementById("app-content").focus();
+      // document.getElementById("app-content").focus();
     });
     // Resize
     this.onResize();
